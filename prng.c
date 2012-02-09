@@ -39,7 +39,7 @@ int main()
     int z4 = 0;
     int n = 0;
     
-    for(j = 0; j < 12; j++ )
+    for(j = 0; j < 1000; j++ )
     {
         if(p < 1000)
         {
