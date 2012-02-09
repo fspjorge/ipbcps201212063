@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <stdlib.h>
 
 void swap(int *valor1, int *valor2)
 {
@@ -13,6 +14,7 @@ void swap(int *valor1, int *valor2)
 int main()
 {
     int x = 0;
+    srand((unsigned)time(NULL));
     clock_t start, end;
     double elapsed;
     
