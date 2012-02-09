@@ -3,6 +3,21 @@
 #include <math.h>
 #include <stdlib.h>
 
+/*
+** Autor: Jorge Pereira 12063
+** MESI
+** Implementacao de um gerador de numeros pseudo-aleatorios na linguagem C
+** Processador Intel Core2 Duo T6500 @ 2.10GHz
+** Tempos medidos por quantidade de PRN:
+** 1000 -> 0.0
+** 10000 -> 0.04
+** 100000 -> 0.38
+** 1000000 -> 2.47
+*/
+
+/*
+** Funcao que efetua a troca dos valores de duas variaveis
+*/
 void swap(int *valor1, int *valor2)
 {
     int tmp = *valor1;
@@ -10,9 +25,11 @@ void swap(int *valor1, int *valor2)
     *valor2 = tmp;
 }
 
+/*
+** Funcao gera uma quantidade de numeros pseudo aleatorios atribuida pelo utilizador
+*/
 void prng(int totalNumbers)
 {
-    int x = 0;
     srand((unsigned)time(NULL));
     clock_t start, end;
     double elapsed;
@@ -20,25 +37,26 @@ void prng(int totalNumbers)
     start = clock();
     
     int T[1000];
-    int digits[] = {0,1,2,3,4,5,6,7,8,9};
+    int digits[10] = {0,0,0,0,0,0,0,0,0,0};
     
+    int x = 0;
     while(x < 1000)
     {
         int r = rand()%10;
-        if(digits[r] < 100)
+        if((digits[r]) < 100)
         {
             T[x]=r;
+	    digits[r]++;
             x++;
         }
     }
     
     int p = rand()%1000;
-    int j;
+    int j,n;
     int z1 = 0;
     int z2 = 0;
     int z3 = 0;
     int z4 = 0;
-    int n = 0;
     
     for(j = 0; j < totalNumbers; j++ )
     {
@@ -47,43 +65,52 @@ void prng(int totalNumbers)
             z1 = T[p];
             swap(&T[p], &T[0]);
         }
-        else
+        else if(p >= 1000)
         {
             z1 = T[0];
         }
+
         if(p < 999)
         {
             z2 = T[p+1];
             swap(&T[p+1], &T[0]);
         }
-        else
+        else if(p >= 999)
         {
             z2 = T[0];
         }
+
         if(p < 998)
         {
             z3 = T[p+2];
             swap(&T[p+2], &T[0]);
         }
-        else
+        else if(p >= 998)
         {
             z3 = T[0];
         }
+
         if(p < 997)
         {
             z4 = T[p+3];
             swap(&T[p+3], &T[0]);
         }
-        else
+        else if(p >= 997)
         {
             z4 = T[0];
         }
-        
+
         n = (z1 << 12) | (z2 << 8) | (z3 << 4) | z4;
         
-        p = z1 * pow(10, 2) + z2 * pow(10, 1) + z3 * 10;
+        p = z1 * 100 + z2 * 10 + z3;
         
-        printf("n:%d | p:%d\n", n, p);
+	// output comentado para se efectuar uma comparacao leal dos tempos com os tempos da implementacao em Python
+        //printf("k:%d | p:%d | prn:%d\n", j+1, p, n);
+        
+	if(p == 999)
+	{
+	    p = rand()%1000;
+	}
     }
     end = clock();
     
@@ -101,9 +128,9 @@ int main(int argc, char **argv)
     else if(argc <= 1)
     {
         printf("Tem de indicar a quantidade de elementos a ser gerada!\n");
+	printf("Utilizacao: ./prng <quantidade>\n");
     }
     
     return 0;
 }
-
 
