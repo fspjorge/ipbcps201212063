@@ -10,8 +10,7 @@ void swap(int *valor1, int *valor2)
     *valor2 = tmp;
 }
 
-
-int main()
+void prng(int totalNumbers)
 {
     int x = 0;
     srand((unsigned)time(NULL));
@@ -41,7 +40,7 @@ int main()
     int z4 = 0;
     int n = 0;
     
-    for(j = 0; j < 1000; j++ )
+    for(j = 0; j < totalNumbers; j++ )
     {
         if(p < 1000)
         {
@@ -91,6 +90,18 @@ int main()
     elapsed = ((double) (end - start)) / CLOCKS_PER_SEC;
     
     printf("total time: %f\n", elapsed);
+}
+
+int main(int argc, char **argv)
+{
+    if(argc > 1)
+    {
+        prng(atoi(argv[1]));
+    }
+    else if(argc <= 1)
+    {
+        printf("Tem de indicar a quantidade de elementos a ser gerada!\n");
+    }
     
     return 0;
 }
