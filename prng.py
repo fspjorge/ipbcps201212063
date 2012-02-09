@@ -4,6 +4,10 @@
 trab CPS
 Jorge Pereira - 12063
 MESI
+Estudo realizado com um computador com as seguintes caracteristicas:
+Processador Intel Core2 Duo T6500 @ 2.10GHz
+4GB DDR2
+Windows 7 64bit
 '''
 import math
 import time
@@ -21,7 +25,7 @@ time1 = time.clock() # inicio da contagem
 T = [] # Tabela(array) T inicializada sem elementos
 x = 0
 digits = [0 for x in range(10)] # Array digits que vai permitir contar e limitar o numero de digitos, de 0 a 9, a 100.
-
+print digits
 while x < 1000:
     r = random.randint(0,9) # digitos gerados aleatoriamente de 0 a 9 (http://docs.python.org/library/random.html)
     if(digits[r] < 100): # condicao que verifica se já existem 100 elementos da tabela com digitos de 0 a 9
@@ -33,7 +37,7 @@ while x < 1000:
 
 p = random.randint(0,999) # p é gerado aleatoriamente
 
-for j in range(pow(2,8)): # vamos considerar um numero de 8 bits (256)
+for j in range(pow(2,9)): # vamos considerar um numero de 8 bits (256)
     if(p<1000):
         z1=T[p]
         swap(T[p], T[0])
